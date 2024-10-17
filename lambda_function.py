@@ -21,12 +21,12 @@ def validate(file_as_string):
     
     return EXPECTED == provider_name
     
-def write_to_bucket(contents: bytes, timestamp: str):
+def write_to_bucket(contents: str, timestamp: str):
     import boto3
     file_name = f"{BUCKET_NAME}/{timestamp}.json"
     
     s3 = boto3.resource("s3")
-    s3.Bucket(BUCKET_NAME).upload_fileobj(Key=file_name, Body=contents)
+    s3.Bucket(BUCKET_NAME).put_object(Key=file_name, Body=contents)
 
 
 def lambda_handler(event, context):
@@ -34,7 +34,10 @@ def lambda_handler(event, context):
 
     try:
         req = Request(SITE, headers={'User-Agent': 'AWS Lambda'})
-        contents = urlopen(req).read()
+        contents = str(urlopen(req).read().decode('utf-8'))
+
+        if not validate(contents):
+            raise Exception('Validation failed')
 
         write_to_bucket(contents, event['time'])
         
