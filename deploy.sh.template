@@ -1,0 +1,8 @@
+# Create a deployment package
+rm function.zip
+
+zip -r function.zip ./*.py
+
+aws lambda update-function-code \
+  --function-name function-name \
+  --zip-file fileb://function.zip

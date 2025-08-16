@@ -58,19 +58,6 @@ Add the following env vars to the Lambda
 
 Set the following schedule: `cron(0 12 * * ? *)`
 
-## Project Structure
-
-```
-├── lambda_function.py   # Lambda handler
-├── lib.py               # Shared logic
-├── tests/               # Pytest tests
-├── .env                 # Environment config
-├── .pre-commit-config.yaml
-├── pyproject.toml
-├── pytest.ini
-├── .gitignore
-```
-
 ## License
 
 MIT
