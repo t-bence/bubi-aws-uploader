@@ -1,25 +1,26 @@
+import os
 import tempfile
+import urllib.request
 from datetime import datetime
 
 import boto3
-import requests
 
 from lib import compute_filename
 
-S3_BUCKET = "my-target-bucket"
-TARGET_URL = "https://example.com/myfile.txt"
+S3_BUCKET = os.getenv("S3_BUCKET")
+TARGET_URL = os.getenv("TARGET_URL")
 
 s3 = boto3.client("s3")
 
 
-def handler(event, context):
-    response = requests.get(TARGET_URL)
-    response.raise_for_status()
+def lambda_handler(event, context):
+    with urllib.request.urlopen(TARGET_URL) as response:
+        content = response.read()
 
     filename = compute_filename(datetime.utcnow())
 
     with tempfile.NamedTemporaryFile() as tmp:
-        tmp.write(response.content)
+        tmp.write(content)
         tmp.flush()
         s3.upload_file(tmp.name, S3_BUCKET, filename)
 

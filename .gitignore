@@ -35,3 +35,4 @@ htmlcov/
 .DS_Store
 
 .pytest_cache
+deploy.sh
