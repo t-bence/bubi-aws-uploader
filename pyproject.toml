@@ -1,0 +1,22 @@
+[tool.uv]
+# Enable uv as the Python package manager
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
+
+[tool.pre-commit]
+# Pre-commit configuration will be in .pre-commit-config.yaml
+
+[project]
+name = "bubi-aws-uploader"
+version = "0.1.0"
+description = "AWS uploader Lambda with uv, pytest, and pre-commit"
+authors = [ { name = "t-bence" } ]
+dependencies = [
+    "boto3>=1.40.11",
+    "pre-commit>=4.3.0",
+]
+
+requires-python = ">=3.10"

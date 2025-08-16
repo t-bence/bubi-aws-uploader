@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.env
+.env*
+.venv/
+venv/
+
+# VS Code
+.vscode/
+
+# uv
+.uv/
+
+# Pre-commit
+.pre-commit-config.yaml
+.pre-commit-hooks.yaml
+.pre-commit-cache/
+
+# Test and coverage
+.coverage
+htmlcov/
+*.cover
+*.py,cover
+
+# Logs
+*.log
+
+# AWS Lambda
+*.zip
+
+# Misc
+.DS_Store
+
+.pytest_cache
